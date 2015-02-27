@@ -49,6 +49,7 @@ var cg = {
      this.player = false
    },
    start: function() {
+     $('.promo').hide();
      cg.dispText = function() {}
      $(cg.canvas).unbind('click')
      cg.player = new Player()
@@ -211,8 +212,8 @@ var cg = {
      w = this.ctx.measureText(t = '(click to begin)').width
      this.ctx.fillText(t, (this.config.width - w)/2, cg.config.height / 2)
 
-     w = this.ctx.measureText(t = 'created by').width
-     this.ctx.fillText(t, (this.config.width - w)/2, cg.config.height / 2 + 180)
+     // w = this.ctx.measureText(t = 'created by').width
+     // this.ctx.fillText(t, (this.config.width - w)/2, cg.config.height / 2 + 180)
 
      this.zHeight = 81
      this.zWidth = 296
