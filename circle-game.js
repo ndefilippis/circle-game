@@ -20,14 +20,14 @@ var cg = {
    },
    circles: [],
    death: function() {
-	 pts = cg.player.radius
+     pts = cg.player.radius
      this.stop()
      this.dispText = function() {
        this.ctx.font = '40pt Verdana'
        this.ctx.fillStyle = 'white'
        w = this.ctx.measureText(t = 'You dead').width
        this.ctx.fillText(t, (this.config.width - w)/2, cg.config.height / 2)
-		
+
        w = this.ctx.measureText(t = (pts - cg.config.circle.playerRadius) + ' pts').width
        this.ctx.fillText(t, (this.config.width - w)/2, cg.config.height / 2 + 60)
 
@@ -322,7 +322,7 @@ var cg = {
        if(dist < circle.radius + this.radius) {
          if(circle.radius > this.radius) {
            cg.death()
-		   break
+           break
          } else {
            this.radius++
            cg.circles.splice(i,1)
