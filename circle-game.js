@@ -3,7 +3,6 @@
  */
 var cg = {
   lastTime: (new Date()).getTime(),
-  score: null,
    config: {
      width: 640,
      height: 960,
@@ -21,9 +20,7 @@ var cg = {
    },
    circles: [],
    death: function() {
-	 if (!this.score) {
-		this.score = cg.player.radius - this.config.circle.playerRadius
-	 }
+	 pts = cg.player.radius
      this.stop()
      this.dispText = function() {
        this.ctx.font = '40pt Verdana'
@@ -31,7 +28,7 @@ var cg = {
        w = this.ctx.measureText(t = 'You dead').width
        this.ctx.fillText(t, (this.config.width - w)/2, cg.config.height / 2)
 		
-       w = this.ctx.measureText(t = this.score + ' pts').width
+       w = this.ctx.measureText(t = (pts - cg.config.circle.playerRadius) + ' pts').width
        this.ctx.fillText(t, (this.config.width - w)/2, cg.config.height / 2 + 60)
 
        this.ctx.font = '20pt Verdana'
@@ -57,7 +54,6 @@ var cg = {
      cg.player = new Player()
      cg.circles = []
      cg.hideCursor()
-	 this.score = null
      if(cg.config.touchmove)
        $(document).bind('touchmove', cg.touchMove)
      else
@@ -326,6 +322,7 @@ var cg = {
        if(dist < circle.radius + this.radius) {
          if(circle.radius > this.radius) {
            cg.death()
+		   break
          } else {
            this.radius++
            cg.circles.splice(i,1)
