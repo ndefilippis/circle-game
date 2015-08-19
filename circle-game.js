@@ -322,6 +322,7 @@ var cg = {
        if(dist < circle.radius + this.radius) {
          if(circle.radius > this.radius) {
            cg.death()
+           break
          } else {
            this.radius++
            cg.circles.splice(i,1)
