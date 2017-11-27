@@ -238,24 +238,33 @@ var cg = {
      this.vx = Math.random() - .5
      this.vy = Math.random() - .5
    } else {
+     /*
+      Probability based on:
+      p + p' = 0.5
+      p / p' = width/height
+      
+      This will uniformly sample points along the perimeter, instead of having them clusted on the smaller edge
+     */
      r = Math.random()
-     if(r <= .25) {
+     aspectRatio = cg.config.width / cg.config.height;
+     p = 0.5 / (aspectRatio + 1)
+     if( r <= p) {  //left
        this.x = 1 - this.radius
        this.y = Math.random() * cg.config.height
        this.vx = Math.random()
        this.vy = Math.random() - .5
-     } else if(r > .25 && r <= .5) {
+     } else if(r <= .5) { //top
+       this.x = Math.random() * cg.config.width
+       this.y = 1 - this.radius
+       this.vx = Math.random() - .5
+       this.vy = Math.random()
+     } else if(r <= .5 + p) { //right
        this.x = cg.config.width + this.radius - 1
        this.y = Math.random() * cg.config.height
        this.vx = - Math.random()
        this.vy = Math.random() - .5
-     } else if(r > .5 && r <= .75) {
-       this.x = Math.random() * cg.config.height
-       this.y = 1 - this.radius
-       this.vx = Math.random() - .5
-       this.vy = Math.random()
-     } else {
-       this.x = Math.random() * cg.config.height
+     } else { //bottom
+       this.x = Math.random() * cg.config.width
        this.y = cg.config.height + this.radius - 1
        this.vx = Math.random() - .5
        this.vy = - Math.random()
